@@ -6,10 +6,13 @@
 / {
 	model = "TP-Link TL-WDR3500 v1";
 	compatible = "tplink,tl-wdr3500-v1", "qca,ar9344";
+<<<<<<< HEAD
 
 	aliases {
 		label-mac-device = &wmac;
 	};
+=======
+>>>>>>> 456e1c60d6... ath79: add support for TP-Link WDR3500 v1
 };
 
 &leds {

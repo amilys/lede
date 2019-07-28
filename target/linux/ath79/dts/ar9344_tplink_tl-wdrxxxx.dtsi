@@ -7,10 +7,17 @@
 
 / {
 	aliases {
+<<<<<<< HEAD
 		led-boot = &led_system;
 		led-failsafe = &led_system;
 		led-running = &led_system;
 		led-upgrade = &led_system;
+=======
+		led-boot = &system;
+		led-failsafe = &system;
+		led-running = &system;
+		led-upgrade = &system;
+>>>>>>> 456e1c60d6... ath79: add support for TP-Link WDR3500 v1
 	};
 
 	leds: leds {
@@ -22,7 +29,11 @@
 			linux,default-trigger = "phy0tpt";
 		};
 
+<<<<<<< HEAD
 		led_system: system {
+=======
+		system: system {
+>>>>>>> 456e1c60d6... ath79: add support for TP-Link WDR3500 v1
 			label = "tp-link:green:system";
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 			default-state = "on";
@@ -45,7 +56,12 @@
 	};
 
 	keys {
+<<<<<<< HEAD
 		compatible = "gpio-keys";
+=======
+		compatible = "gpio-keys-polled";
+		poll-interval = <20>;
+>>>>>>> 456e1c60d6... ath79: add support for TP-Link WDR3500 v1
 
 		reset {
 			linux,code = <KEY_RESTART>;
@@ -71,10 +87,17 @@
 };
 
 &spi {
+<<<<<<< HEAD
 	status = "okay";
 
 	num-cs = <1>;
 
+=======
+	num-cs = <1>;
+
+	status = "okay";
+
+>>>>>>> 456e1c60d6... ath79: add support for TP-Link WDR3500 v1
 	flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
