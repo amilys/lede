@@ -33,13 +33,13 @@ sed -i 's/downloads.openwrt.org/openwrt.proxy.ustclug.org/g' /etc/opkg/distfeeds
 sed -i 's/http/https/g' /etc/opkg/distfeeds.conf
 sed -i 's/root::0:0:99999:7:::/root:$1$vqM9Hijf$RXLWSi4TItLyFMeuBKQ3B1:18306:0:99999:7:::/g' /etc/shadow
 
-sed -i "s/# //g" /etc/opkg/distfeeds.conf
-
-echo "src/gz openwrt_core http://mr.ssr0.cn:8000/openwrt/snapshots/targets/ramips/mt7621/packages" >> /etc/opkg/customfeeds.conf
-echo "src/gz openwrt_base http://mr.ssr0.cn:8000/openwrt/snapshots/packages/mipsel_24kc/base" >> /etc/opkg/customfeeds.conf
-echo "src/gz openwrt_luci http://mr.ssr0.cn:8000/openwrt/snapshots/packages/mipsel_24kc/luci" >> /etc/opkg/customfeeds.conf
-echo "src/gz openwrt_packages http://mr.ssr0.cn:8000/openwrt/snapshots/packages/mipsel_24kc/packages" >> /etc/opkg/customfeeds.conf
-echo "src/gz openwrt_routing http://mr.ssr0.cn:8000/openwrt/snapshots/packages/mipsel_24kc/routing" >> /etc/opkg/customfeeds.conf
+cat > /etc/opkg/customfeeds.conf << EOF
+src/gz openwrt_core http://mr.ssr0.cn:8000/openwrt/snapshots/targets/ramips/mt7621/packages
+src/gz openwrt_base http://mr.ssr0.cn:8000/openwrt/snapshots/packages/mipsel_24kc/base
+src/gz openwrt_luci http://mr.ssr0.cn:8000/openwrt/snapshots/packages/mipsel_24kc/luci
+src/gz openwrt_packages http://mr.ssr0.cn:8000/openwrt/snapshots/packages/mipsel_24kc/packages
+src/gz openwrt_routing http://mr.ssr0.cn:8000/openwrt/snapshots/packages/mipsel_24kc/routing
+EOF
 
 sed -i '/REDIRECT --to-ports 53/d' /etc/firewall.user
 echo "iptables -t nat -A PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 53" >> /etc/firewall.user
