@@ -54,8 +54,8 @@ start() {
 		p("ifname", "lan_ifname")
 		p("macaddr", "lan_macaddr")
 		print "	option proto	static"
-		print "	option ipaddr	192.168.1.1"
-		print "	option netmask	255.255.255.0"
+		print "	option ipaddr	192.168.0.1"
+		print "	option netmask	255.255.255.224"
 		print ""
 		print ""
 		print "#### WAN configuration"
