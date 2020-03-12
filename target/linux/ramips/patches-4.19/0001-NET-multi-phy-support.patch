@@ -1,0 +1,53 @@
+From 2f63e3480c5a5c6e253ef8e5c00a45c47bb01972 Mon Sep 17 00:00:00 2001
+From: amily <ssr0@ssr0.cn>
+Date: Thu, 12 Mar 2020 18:50:16 +0800
+Subject: [PATCH] NET: multi phy support
+
+---
+ drivers/net/phy/phy.c | 10 ++++++++--
+ include/linux/phy.h   |  1 +
+ 2 files changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
+index 1ee25877c..4e0f87319 100644
+--- a/drivers/net/phy/phy.c
++++ b/drivers/net/phy/phy.c
+@@ -966,7 +966,10 @@ void phy_state_machine(struct work_struct *work)
+ 		/* If the link is down, give up on negotiation for now */
+ 		if (!phydev->link) {
+ 			phydev->state = PHY_NOLINK;
+-			phy_link_down(phydev, true);
++			if (!phydev->no_auto_carrier_off)
++					phy_link_down(phydev, true);
++			else
++					phy_link_down(phydev, false);
+ 			break;
+ 		}
+ 
+@@ -1053,7 +1056,10 @@ void phy_state_machine(struct work_struct *work)
+ 			phy_link_up(phydev);
+ 		} else {
+ 			phydev->state = PHY_NOLINK;
+-			phy_link_down(phydev, true);
++			if (!phydev->no_auto_carrier_off)
++					phy_link_down(phydev, true);
++			else
++					phy_link_down(phydev, false);
+ 		}
+ 		break;
+ 	case PHY_HALTED:
+diff --git a/include/linux/phy.h b/include/linux/phy.h
+index cd6f637cb..5a952cc5b 100644
+--- a/include/linux/phy.h
++++ b/include/linux/phy.h
+@@ -413,6 +413,7 @@ struct phy_device {
+ 	unsigned suspended:1;
+ 	unsigned sysfs_links:1;
+ 	unsigned loopback_enabled:1;
++	unsigned no_auto_carrier_off:1;
+ 
+ 	unsigned autoneg:1;
+ 	/* The most recently read link state */
+-- 
+2.25.1
+
