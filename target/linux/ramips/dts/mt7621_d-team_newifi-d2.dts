@@ -14,7 +14,11 @@
 		led-failsafe = &led_power_blue;
 		led-running = &led_power_blue;
 		led-upgrade = &led_power_blue;
-		label-mac-device = &ethernet;
+	};
+
+	memory@0 {
+		device_type = "memory";
+		reg = <0x0 0x1c000000>, <0x20000000 0x4000000>;
 	};
 
 	chosen {
@@ -63,7 +67,8 @@
 	};
 
 	keys {
-		compatible = "gpio-keys";
+		compatible = "gpio-keys-polled";
+		poll-interval = <20>;
 
 		reset {
 			label = "reset";
@@ -153,9 +158,11 @@
 	mtd-mac-address = <&factory 0xe000>;
 };
 
-&state_default {
-	gpio {
-		ralink,group = "i2c", "jtag", "uart2", "uart3";
-		ralink,function = "gpio";
+&pinctrl {
+	state_default: pinctrl0 {
+		gpio {
+			ralink,group = "i2c", "jtag", "uart2", "uart3";
+			ralink,function = "gpio";
+		};
 	};
 };
