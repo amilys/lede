@@ -246,12 +246,12 @@ define KernelPackage/mt7603/install
 endef
 
 define KernelPackage/mt7615e/install
-	$(INSTALL_DIR) $(1)/lib/firmware/mediatek
+	$(INSTALL_DIR) $(1)/lib/firmware
 	cp \
 		$(PKG_BUILD_DIR)/firmware/mt7615_cr4.bin \
 		$(PKG_BUILD_DIR)/firmware/mt7615_n9.bin \
 		$(PKG_BUILD_DIR)/firmware/mt7615_rom_patch.bin \
-		$(1)/lib/firmware/mediatek
+		$(1)/lib/firmware
 endef
 
 $(eval $(call KernelPackage,mt76-core))
